@@ -1,0 +1,26 @@
+name: Checkmarx SAST Scan
+on:
+  push:
+    branches:
+      - main
+      - master
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Checkmarx CxFlow Action
+      uses: KHDEMOORG/checkmarx-cxflow-github-action@master #Github Action version
+      with:
+        project: CxFlow_TEST # <-- Insert Checkmarx SAST Project Name
+        team: /CxServer
+        checkmarx_url: https://c8f2-103-241-82-99.ngrok-free.app # To be stored in GitHub Secrets.
+        checkmarx_username: Admin@cx # To be stored in GitHub Secrets.
+        checkmarx_password: Cx1234567! # To be stored in GitHub Secrets.
+        checkmarx_client_secret: 014DF517-39D1-4453-B7B3-9930C563627C # To be stored in GitHub Secrets.
+        break_build: false
+        scanners: sast
+        bug_tracker: Sarif
+        params: --namespace=${{ github.repository_owner }} --checkmarx.settings-override=true --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref_name }} --cx-flow.filterSeverity --cx-flow.filterCategory  --checkmarx.disable-clubbing=true
