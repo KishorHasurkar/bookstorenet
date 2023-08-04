@@ -12,9 +12,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Checkmarx CxFlow Action
-      uses: KHDEMOORG/checkmarx-cxflow-github-action@v1.9 #Github Action version
+      uses: KHDEMOORG/checkmarx-cxflow-github-action@9c07e2adcb17d0fdf60f3184ff53720513ea3c09 #Github Action version
       with:
-        project: CxFlow_TEST # <-- Insert Checkmarx SAST Project Name
+        project: CxFlow_TEST1 # <-- Insert Checkmarx SAST Project Name
         team: /CxServer
         checkmarx_url: https://c8f2-103-241-82-99.ngrok-free.app # To be stored in GitHub Secrets.
         checkmarx_username: Admin@cx # To be stored in GitHub Secrets.
