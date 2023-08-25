@@ -1,10 +1,10 @@
-version: 0.2
-
-env:
-  variables:
+version: 0.2 
+env: 
+  variables: 
     AST_CLI_EXE: "/app/bin/cx" 
-    
-  build:
-    pre_build:
-      commands:
-          - ./cx scan create --project-name "$CX_PROJECT_NAME" --file-source "." --branch "main" --report-format 'summaryHTML' --agent 'CodeCommit' --base-uri "$CX_BASE_URI" --tenant "$CX_TENANT" --client-id "$CX_CLIENT_ID" --client-secret "$CX_CLIENT_SECRET"
+    CX_PROJECT_NAME: "Demo_GitHub_SQLInjection_XSS" 
+phases: 
+  pre_build: 
+    commands: 
+      - | 
+        ${AST_CLI_EXE} scan create \ --project-name ${CX_PROJECT_NAME} \ --file-source . \ --branch ${CODEBUILD_SOURCE_VERSION}
