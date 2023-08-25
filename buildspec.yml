@@ -1,10 +1,10 @@
-version: 0.2 
-env: 
-  variables: 
-    AST_CLI_EXE: "/app/bin/cx" 
-    CX_PROJECT_NAME: "Demo_GitHub_SQLInjection_XSS" 
-phases: 
-  pre_build: 
-    commands: 
-      - | 
-        ${AST_CLI_EXE} scan create --project-name ${CX_PROJECT_NAME} --file-source . --branch ${CODEBUILD_SOURCE_VERSION}
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - wget -O ./cxcli.tar.gz "https://github.com/Checkmarx/ast-cli/releases/download/${CX_VERSION}/ast-cli_${CX_VERSION}_linux_x64.tar.gz"
+      - tar xzvf ./cxcli.tar.gz
+  build:
+    commands:
+      - ./cx scan create --project-name "$CX_PROJECT_NAME" --file-source "." --branch "main" --report-format 'summaryHTML' --agent 'CodeCommit' --base-uri "$CX_BASE_URI" --tenant "$CX_TENANT" --client-id "$CX_CLIENT_ID" --client-secret "$CX_CLIENT_SECRET"
