@@ -7,4 +7,4 @@ phases:
   pre_build: 
     commands: 
       - | 
-        ${AST_CLI_EXE} scan create \ --project-name ${CX_PROJECT_NAME} \ --file-source . \ --branch ${CODEBUILD_SOURCE_VERSION}
+        ${AST_CLI_EXE} scan create --project-name ${CX_PROJECT_NAME} --file-source . --branch ${CODEBUILD_SOURCE_VERSION}
